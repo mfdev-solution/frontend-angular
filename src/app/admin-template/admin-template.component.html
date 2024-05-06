@@ -3,8 +3,8 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span class="spacer"></span>
-  <button mat-button routerLink="/home"> Home</button>
-  <button mat-button routerLink="/profile"> Profile</button>
+  <button mat-button routerLink="/admin/home"> Home</button>
+  <button mat-button routerLink="/admin/profile"> Profile</button>
   <button mat-button [matMenuTriggerFor]="importMenu" >
     <mat-icon>arrow_drop_down</mat-icon>
     Import
@@ -13,27 +13,35 @@
 
 <!--  </mat-menu>-->
   <mat-menu #importMenu>
-    <button mat-menu-item routerLink ="/loadStudents">Load Students</button>
-    <button mat-menu-item routerLink ="/loadPayments">Load Payment</button>
+    <button mat-menu-item routerLink ="/admin/loadStudents">Load Students</button>
+    <button mat-menu-item routerLink ="/admin/loadPayments">Load Payment</button>
   </mat-menu>
-  <button routerLink="/login" mat-raised-button color="accent"> Login</button>
+  <span *ngIf="authService.authenticated==true">
+    <button mat-button >{{authService.username}}  </button>
+    <button (click)="logout()" routerLink="/login" mat-raised-button color="accent"> Logout</button>
+  </span>
+
+  <span *ngIf="authService.authenticated==false">
+    <button routerLink="/login" mat-raised-button color="accent"> Login</button>
+  </span>
+
 </mat-toolbar>
 <mat-drawer-container >
   <mat-drawer #drawer mode="side" position="start" opened="true">
     <mat-nav-list>
       <mat-list-item>
-        <button mat-button routerLink="/dashboard">
+        <button mat-button routerLink="/admin/dashboard">
           <mat-icon >dashboard</mat-icon>
           Dashboard
         </button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button routerLink="/students">
+        <button mat-button routerLink="/admin/students">
           <mat-icon>dashboard</mat-icon>
           Students</button>
       </mat-list-item>
       <mat-list-item>
-        <button mat-button routerLink="/payments">
+        <button mat-button routerLink="/admin/payments">
           <mat-icon>dashboard</mat-icon>
           Payments</button>
       </mat-list-item>
