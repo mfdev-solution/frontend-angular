@@ -9,20 +9,22 @@ import {Injectable} from "@angular/core";
 import {AuthenticationService} from "../services/authentication.service";
 
 @Injectable()
-export class AuthGuard {
+export class AuthorizationGuard {
   constructor(
     private authService:AuthenticationService,
     private router:Router
           ) {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    if(this.authService.authenticated == true){
-      return true;
-    }else
-    {
-      this.router.navigateByUrl("/login")
-      return false;
+    let authorize = false;
+    let roles = this.authService.roles as string[]
+    for (let role of roles) {
+      if(role in route.data['roles']){
+       authorize = true;
+       break;
+      }
     }
+    return authorize;
 
   }
 
