@@ -17,13 +17,14 @@ export class AuthorizationGuard {
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
     let authorize = false;
+    let authorizedRole:string[]  = route.data['roles'];
     let roles = this.authService.roles as string[]
-    for (let role of roles) {
-      if(role in route.data['roles']){
-       authorize = true;
-       break;
+    for (let i = 0; i < roles.length; i++) {
+      if(authorizedRole.includes(roles[i])){
+        authorize =true
       }
     }
+
     return authorize;
 
   }

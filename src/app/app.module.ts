@@ -30,6 +30,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./guards/auth.guard";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthorizationGuard} from "./guards/Authorization.guard";
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {AuthorizationGuard} from "./guards/Authorization.guard";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -65,10 +67,11 @@ import {AuthorizationGuard} from "./guards/Authorization.guard";
     MatSortHeader,
     MatInput,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
-    AuthGuard,AuthorizationGuard
+    AuthGuard,AuthorizationGuard, provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
