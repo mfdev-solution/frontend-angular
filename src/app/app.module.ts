@@ -32,6 +32,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthorizationGuard} from "./guards/Authorization.guard";
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { StudentDetailsComponent } from './student-details/student-details.component';
+import { NewPaymentComponent } from './new-payment/new-payment.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
     PaymentsComponent,
     LoadStudentsComponent,
     LoadPaymentsComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    NewPaymentComponent
   ],
   imports: [
     BrowserModule,

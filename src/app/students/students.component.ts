@@ -4,6 +4,7 @@ import { StudentService } from './../services/student.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-students',
@@ -17,7 +18,9 @@ export class StudentsComponent implements OnInit {
   public displayedColumns: string[] = ["id","firstname","lastname","code","programId","payments"];
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  constructor(private StudentService:StudentService){}
+  constructor(private StudentService:StudentService,
+              private router:Router
+  ){}
   ngOnInit(): void {
     this.StudentService.getAllStudents().subscribe({
       next: value =>{
@@ -36,15 +39,6 @@ export class StudentsComponent implements OnInit {
 
   getPaymentElement(student: Student) {
 
-    console.log(student);
-    this.StudentService.getAllPaymentsByStudent(student).subscribe({
-      next: payments=>{
-
-
-
-      },
-      error: err => console.log(err)
-    })
-
-    }
+    this.router.navigateByUrl(`/admin/student-datails/${student.code}`)
+  }
 }
