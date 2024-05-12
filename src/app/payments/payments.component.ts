@@ -1,3 +1,4 @@
+import { StudentService } from './../services/student.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,15 +18,17 @@ export class PaymentsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator! : MatPaginator
 
   @ViewChild(MatSort) sort! : MatSort;
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,
+    private studentService:StudentService
+  ){}
   ngOnInit(): void {
 
-    this.http.get("http://localhost:8022/payments").subscribe({
+    this.studentService.getAllPayments().subscribe({
       next:value=>{
         this.payments = value;
         this.dataSource = new MatTableDataSource(this.payments)
         this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort
       },
       error:error=>{
 
