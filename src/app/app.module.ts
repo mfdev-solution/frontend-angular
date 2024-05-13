@@ -33,7 +33,9 @@ import {AuthorizationGuard} from "./guards/Authorization.guard";
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { NewPaymentComponent } from './new-payment/new-payment.component';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +74,11 @@ import { NewPaymentComponent } from './new-payment/new-payment.component';
     MatInput,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+
+
 
   ],
   providers: [

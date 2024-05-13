@@ -11,6 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrl: './payments.component.css'
 })
 export class PaymentsComponent implements OnInit {
+
+
   public dataSource:any;
   public payments:any;
   public displayedColumns = ["id","date","amount","type","status","firstName"]
@@ -35,6 +37,8 @@ export class PaymentsComponent implements OnInit {
       },
     })
    }
+
+
 
 
 }

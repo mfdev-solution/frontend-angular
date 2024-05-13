@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from './../services/student.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Payment } from '../Model/students.model';
@@ -13,6 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class StudentDetailsComponent implements OnInit{
 
+
   public studentCode!: string;
   public studentPayments!: Array<Payment>
   public paymentDataSource!:MatTableDataSource<Payment>;
@@ -22,7 +23,8 @@ export class StudentDetailsComponent implements OnInit{
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor(private studentservice:StudentService,
-              private activatedRoute : ActivatedRoute
+              private activatedRoute : ActivatedRoute,
+              private router:Router
    ){}
 
   ngOnInit(): void {
@@ -41,6 +43,9 @@ export class StudentDetailsComponent implements OnInit{
     })
   }
 
+  newPayment() {
+    this.router.navigateByUrl(`/admin/new-payment/${this.studentCode}`)
+    }
 
 
 }

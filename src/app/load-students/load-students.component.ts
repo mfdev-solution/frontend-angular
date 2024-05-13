@@ -36,7 +36,6 @@ export class LoadStudentsComponent implements OnInit,AfterViewInit{
     this.dataSource.sort  = this.sort;
   }
 
-
   searchStudent(event: Event) {
     let value = (event.target as HTMLInputElement).value;
     this.dataSource.filter = value;
