@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../Model/students.model';
 import { StudentService } from '../services/student.service';
+import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
 
 @Component({
   selector: 'app-new-payment',
@@ -13,10 +14,12 @@ export class NewPaymentComponent implements OnInit{
 
 
 
+
   public paymentFormFGroup !: FormGroup;
   public studentCode!: string;
   public paymentType : string[] = [];
   public padFileUrl! : string;
+  public showProgress : boolean = false;
 
   constructor(private fb:FormBuilder,
     private actiatedRoute:ActivatedRoute,
@@ -51,6 +54,7 @@ export class NewPaymentComponent implements OnInit{
     }
 
      savePayment() {
+      this.showProgress = true  
       let date:Date = new Date(this.paymentFormFGroup.value.date)
       let formattedDate :string = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
 
@@ -66,15 +70,22 @@ export class NewPaymentComponent implements OnInit{
       this.studentService.savePayment(formData).subscribe({
         next: payment =>{
           alert("Payment saved successfully")
+
         },
         error: err => {
             console.log(err);
 
         },
-      })
+      });
+      this.showProgress
 
 
 
       }
+
+      afterLoadComplete(event: PDFDocumentProxy) {
+        console.log(event);
+
+        }
 
 }
